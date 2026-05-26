@@ -29,7 +29,9 @@ export default defineConfig({
         text: 'SDK',
         items: [
           { text: '总览', link: '/sdk/' },
-          { text: 'usermgr (Go)', link: '/sdk/usermgr' },
+          { text: 'Go · usermgr', link: '/sdk/golang/usermgr' },
+          { text: 'Python · usermgr', link: '/sdk/python/usermgr' },
+          { text: 'TypeScript · usermgr', link: '/sdk/typescript/usermgr' },
         ],
       },
     ],
@@ -58,10 +60,12 @@ export default defineConfig({
       ],
       '/sdk/': [
         {
-          text: 'Go SDK',
+          text: 'SDK',
           items: [
             { text: '总览', link: '/sdk/' },
-            { text: 'usermgr', link: '/sdk/usermgr' },
+            { text: 'Go · usermgr', link: '/sdk/golang/usermgr' },
+            { text: 'Python · usermgr', link: '/sdk/python/usermgr' },
+            { text: 'TypeScript · usermgr', link: '/sdk/typescript/usermgr' },
           ],
         },
       ],

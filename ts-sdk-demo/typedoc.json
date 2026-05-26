@@ -1,0 +1,21 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["src/usermgr.ts"],
+  "plugin": ["typedoc-plugin-markdown"],
+  "out": "../docs-site/sdk/typescript",
+  "readme": "none",
+  "hidePageHeader": true,
+  "hideBreadcrumbs": true,
+  "hidePageTitle": false,
+  "useCodeBlocks": true,
+  "expandObjects": true,
+  "expandParameters": true,
+  "parametersFormat": "table",
+  "propertiesFormat": "table",
+  "enumMembersFormat": "table",
+  "indexFormat": "list",
+  "outputFileStrategy": "modules",
+  "entryFileName": "usermgr.md",
+  "fileExtension": ".md",
+  "skipErrorChecking": true
+}

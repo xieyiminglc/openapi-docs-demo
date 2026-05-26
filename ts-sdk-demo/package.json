@@ -1,0 +1,16 @@
+{
+  "name": "ts-sdk-demo",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "tsx --test src/usermgr.test.ts",
+    "gen-sdk-docs": "typedoc"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typedoc": "^0.28.0",
+    "typedoc-plugin-markdown": "^4.4.0",
+    "typescript": "^5.6.0"
+  }
+}

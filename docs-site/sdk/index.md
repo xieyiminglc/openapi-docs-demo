@@ -1,42 +1,50 @@
 ---
-title: Go SDK
+title: SDK 文档
 ---
 
-# Go SDK
+# SDK 文档
 
-不同于 HTTP API（用 OpenAPI 描述），Go **SDK** 是直接被其他 Go 代码 import 的库。
-文档由源码的 godoc 注释 + `Example*` 函数派生，通过 [`gomarkdoc`](https://github.com/princjef/gomarkdoc) 转成 Markdown 喂给 VitePress。
+跟 OpenAPI 不同——SDK 文档描述的是 **被其他代码直接 import 的库**，
+而不是 HTTP 协议。每种语言有自己的文档生成工具，但产物都是 Markdown，
+最后挂到同一个 VitePress 站。
+
+## 三种语言并列示例
+
+同一份 `usermgr` API 用三种语言实现：
+
+- [**Go** — gomarkdoc](/sdk/golang/usermgr) — `go-sdk-demo/`
+- [**Python** — pydoc-markdown](/sdk/python/usermgr) — `python-sdk-demo/`
+- [**TypeScript** — typedoc + typedoc-plugin-markdown](/sdk/typescript/usermgr) — `ts-sdk-demo/`
+
+## 工具对照
+
+| 语言 | 工具 | 注释格式 | Example 函数 | 输出 |
+|---|---|---|---|---|
+| Go | [`gomarkdoc`](https://github.com/princjef/gomarkdoc) | godoc（`// Doc...`） | `func ExampleXxx()` | Markdown，`[Symbol]` 自动变链接 |
+| Python | [`pydoc-markdown`](https://github.com/NiklasRosenstein/pydoc-markdown) | docstring（Google/RST） | Sphinx `:class:` 引用 | Markdown，Args/Returns 表格 |
+| TypeScript | [`typedoc`](https://typedoc.org/) + [`-plugin-markdown`](https://typedoc-plugin-markdown.org/) | TSDoc（`/** {@link} */`） | `@example` 标签 | Markdown，参数表 + 跨引用 |
 
 ## 文档生成链路
 
 ```
-go-sdk-demo/usermgr/*.go        ← 写 godoc 注释 + Example* 函数
+源码（godoc / docstring / TSDoc）
         │
-        │  make gen-sdk-docs（gomarkdoc）
+        │  make gen-sdk-docs（每个 demo 项目里）
         ▼
-docs-site/sdk/usermgr.md        ← 现在这个目录
+docs-site/sdk/<lang>/usermgr.md
         │
         │  VitePress build
         ▼
-   /sdk/usermgr 页面
+   /sdk/<lang>/usermgr 页面
 ```
-
-## 包列表
-
-- [usermgr](/sdk/usermgr) — 一个最小的内存用户管理 SDK，覆盖：
-  - 包级 doc（含 Quick start / Error handling）
-  - 类型 + 方法的 godoc
-  - `[Symbol]` 跨引用自动变锚点链接
-  - 5 个 `Example*` 函数，作为可编译的代码示例
 
 ## SDK 文档 vs OpenAPI 文档
 
-| | OpenAPI（HTTP API） | gomarkdoc（Go SDK） |
+| | OpenAPI（HTTP API） | SDK Markdown |
 |---|---|---|
-| 描述对象 | HTTP 路径、请求/响应 | Go package 的导出符号 |
-| 源 | 注解 / 类型 / IDL | godoc 注释 + `Example*` |
-| 渲染 | `<OASpec />`（vitepress-openapi） | 标准 markdown |
-| 工具 | swag / Huma / thrift-gen-http-swagger / FastAPI / Hono | `gomarkdoc` |
-| 适合 | 跨语言消费方调用 | Go 语言消费方 import |
+| 描述对象 | HTTP 路径、请求 / 响应 | 包 / 模块的导出符号 |
+| 源 | 注解 / 类型 / IDL | 文档注释 + Example |
+| 渲染 | `<OASpec />` | 普通 markdown |
+| 适合 | 跨语言消费方调用 | 同语言消费方 import |
 
-两条路完全互补——同一个项目可以同时输出两种文档。
+两条路径互补——同一个项目可以同时输出两种文档。

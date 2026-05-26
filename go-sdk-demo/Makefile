@@ -1,4 +1,4 @@
-DOCS_DIR ?= ../docs-site/sdk
+DOCS_DIR ?= ../docs-site/sdk/golang
 GOPATH   := $(shell go env GOPATH)
 GOMARKDOC := $(GOPATH)/bin/gomarkdoc
 
