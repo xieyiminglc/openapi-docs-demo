@@ -25,6 +25,13 @@ export default defineConfig({
           { text: 'TypeScript (Hono)', link: '/api/typescript' },
         ],
       },
+      {
+        text: 'SDK',
+        items: [
+          { text: '总览', link: '/sdk/' },
+          { text: 'usermgr (Go)', link: '/sdk/usermgr' },
+        ],
+      },
     ],
     sidebar: {
       '/guide/': [
@@ -46,6 +53,15 @@ export default defineConfig({
             { text: 'Go (Thrift)', link: '/api/golang' },
             { text: 'Python (FastAPI)', link: '/api/python' },
             { text: 'TypeScript (Hono)', link: '/api/typescript' },
+          ],
+        },
+      ],
+      '/sdk/': [
+        {
+          text: 'Go SDK',
+          items: [
+            { text: '总览', link: '/sdk/' },
+            { text: 'usermgr', link: '/sdk/usermgr' },
           ],
         },
       ],
