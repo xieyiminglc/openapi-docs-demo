@@ -1,0 +1,8 @@
+/biz/
+/output/
+/kitex_gen/
+/docs/
+*.log
+build.sh
+bootstrap.sh
+go.sum

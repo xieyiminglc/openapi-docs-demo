@@ -1,0 +1,27 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# VitePress build
+docs-site/.vitepress/dist/
+docs-site/.vitepress/cache/
+
+# Go server scaffold output (再生成的产物)
+go-server/biz/
+go-server/output/
+go-server/kitex_gen/
+go-server/docs/
+go-server/build.sh
+go-server/bootstrap.sh
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+.vscode/
+*.swp

@@ -1,0 +1,106 @@
+openapi: 3.0.3
+info:
+  title: UserService
+  description: |
+    占位 spec：跑过 `make gen-openapi` 后会被 thrift-gen-http-swagger 真正生成的内容覆盖。
+  version: 0.1.0
+servers:
+  - url: http://127.0.0.1:6789
+    description: local
+tags:
+  - name: UserService
+paths:
+  /api/v1/users:
+    get:
+      tags: [UserService]
+      operationId: ListUsers
+      summary: List users
+      parameters:
+        - in: query
+          name: q
+          schema: { type: string }
+        - in: query
+          name: page
+          schema: { type: integer, format: int32 }
+        - in: query
+          name: size
+          schema: { type: integer, format: int32 }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ListUsersResp' }
+    post:
+      tags: [UserService]
+      operationId: CreateUser
+      summary: Create a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateUserReq' }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CreateUserResp' }
+  /api/v1/users/{user_id}:
+    get:
+      tags: [UserService]
+      operationId: GetUser
+      summary: Get a user by ID
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema: { type: integer, format: int64 }
+        - in: header
+          name: X-Trace-Id
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/GetUserResp' }
+components:
+  schemas:
+    BaseResp:
+      type: object
+      properties:
+        status_code: { type: integer, format: int32 }
+        status_msg:  { type: string }
+    UserInfo:
+      type: object
+      properties:
+        user_id: { type: integer, format: int64 }
+        name:    { type: string }
+        age:     { type: integer, format: int32 }
+        email:   { type: string }
+    CreateUserReq:
+      type: object
+      required: [name, age, email]
+      properties:
+        name:  { type: string, minLength: 1, maxLength: 31 }
+        age:   { type: integer, format: int32, minimum: 0, maximum: 199 }
+        email: { type: string }
+    CreateUserResp:
+      type: object
+      properties:
+        base:    { $ref: '#/components/schemas/BaseResp' }
+        user_id: { type: integer, format: int64 }
+    GetUserResp:
+      type: object
+      properties:
+        base: { $ref: '#/components/schemas/BaseResp' }
+        user: { $ref: '#/components/schemas/UserInfo' }
+    ListUsersResp:
+      type: object
+      properties:
+        base:  { $ref: '#/components/schemas/BaseResp' }
+        users:
+          type: array
+          items: { $ref: '#/components/schemas/UserInfo' }
+        total: { type: integer, format: int64 }
