@@ -1,0 +1,195 @@
+openapi: 3.1.0
+info:
+  title: UserService
+  version: 0.1.0
+components:
+  schemas: {}
+  parameters: {}
+paths:
+  /api/v1/users:
+    post:
+      tags:
+        - UserService
+      operationId: CreateUser
+      summary: Create a user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 31
+                age:
+                  type: integer
+                  minimum: 0
+                  exclusiveMaximum: 200
+                email:
+                  type: string
+                  format: email
+              required:
+                - name
+                - age
+                - email
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  base:
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 0
+                      status_msg:
+                        type: string
+                        example: ok
+                    required:
+                      - status_code
+                      - status_msg
+                  user_id:
+                    type: integer
+                required:
+                  - base
+                  - user_id
+    get:
+      tags:
+        - UserService
+      operationId: ListUsers
+      summary: List users
+      parameters:
+        - schema:
+            type: string
+          required: false
+          name: q
+          in: query
+        - schema:
+            type: integer
+            minimum: 1
+            default: 1
+          required: false
+          name: page
+          in: query
+        - schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+          required: false
+          name: size
+          in: query
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  base:
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 0
+                      status_msg:
+                        type: string
+                        example: ok
+                    required:
+                      - status_code
+                      - status_msg
+                  users:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        user_id:
+                          type: integer
+                        name:
+                          type: string
+                        age:
+                          type: integer
+                          minimum: 0
+                          exclusiveMaximum: 200
+                        email:
+                          type: string
+                          format: email
+                      required:
+                        - user_id
+                        - name
+                        - age
+                        - email
+                  total:
+                    type: integer
+                required:
+                  - base
+                  - users
+                  - total
+  /api/v1/users/{user_id}:
+    get:
+      tags:
+        - UserService
+      operationId: GetUser
+      summary: Get a user by ID
+      parameters:
+        - schema:
+            type: string
+            pattern: ^\d+$
+            example: "42"
+          required: true
+          name: user_id
+          in: path
+        - schema:
+            type: string
+          required: false
+          name: x-trace-id
+          in: header
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  base:
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 0
+                      status_msg:
+                        type: string
+                        example: ok
+                    required:
+                      - status_code
+                      - status_msg
+                  user:
+                    type: object
+                    properties:
+                      user_id:
+                        type: integer
+                      name:
+                        type: string
+                      age:
+                        type: integer
+                        minimum: 0
+                        exclusiveMaximum: 200
+                      email:
+                        type: string
+                        format: email
+                    required:
+                      - user_id
+                      - name
+                      - age
+                      - email
+                required:
+                  - base
+                  - user
+webhooks: {}

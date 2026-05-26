@@ -1,7 +1,7 @@
 PSM        ?= demo.user.svc
 MOD        ?= code.byted.org/demo/user-svc
 IDL        ?= idl/hello.thrift
-DOCS_DIR   ?= ../docs-site/api
+DOCS_DIR   ?= ../docs-site/api/golang
 
 .PHONY: install-tools scaffold gen-openapi clean
 

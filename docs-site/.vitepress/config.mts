@@ -16,7 +16,15 @@ export default defineConfig({
           { text: 'TypeScript', link: '/guide/typescript' },
         ],
       },
-      { text: 'API', link: '/api/' },
+      {
+        text: 'API',
+        items: [
+          { text: '总览', link: '/api/' },
+          { text: 'Go (Thrift)', link: '/api/golang' },
+          { text: 'Python (FastAPI)', link: '/api/python' },
+          { text: 'TypeScript (Hono)', link: '/api/typescript' },
+        ],
+      },
     ],
     sidebar: {
       '/guide/': [
@@ -33,7 +41,12 @@ export default defineConfig({
       '/api/': [
         {
           text: 'API',
-          items: [{ text: 'UserService', link: '/api/' }],
+          items: [
+            { text: '总览', link: '/api/' },
+            { text: 'Go (Thrift)', link: '/api/golang' },
+            { text: 'Python (FastAPI)', link: '/api/python' },
+            { text: 'TypeScript (Hono)', link: '/api/typescript' },
+          ],
         },
       ],
     },
